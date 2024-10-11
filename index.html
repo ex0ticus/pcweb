@@ -2,80 +2,70 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Snowfall Background</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixelated Webpage</title>
 <style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    background-color: #000; /* Black background */
-  }
-  canvas {
-    display: block; /* Remove scrollbars */
-  }
+    body {
+        background-color: #000;
+        color: #fff;
+        font-family: 'Courier New', monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
+    .pixel {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        text-align: center;
+    }
+    .link {
+        color: #1DA1F2;
+        text-decoration: none;
+        border-bottom: 2px dotted #1DA1F2;
+        font-size: 1.2em;
+    }
+    .link:hover {
+        background-color: #1DA1F2;
+        color: #000;
+    }
 </style>
 </head>
 <body>
-<canvas id="snowfallCanvas"></canvas>
+
+<div class="container">
+    <div id="pixelArt"></div>
+    <h1>Welcome to My Pixel World</h1>
+    <p>Check out my updates on X:</p>
+    <a href="https://x.com/parconstantinou" target="_blank" class="link">@parconstantinou</a>
+</div>
+
 <script>
-function setupSnowfall() {
-    const canvas = document.getElementById('snowfallCanvas');
-    const ctx = canvas.getContext('2d');
+document.addEventListener('DOMContentLoaded', (event) => {
+    const pixelArt = document.getElementById('pixelArt');
+    const pixelCount = 20; // Number of pixels in width and height for the logo
     
-    // Set canvas to window size
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    for(let i = 0; i < pixelCount * pixelCount; i++) {
+        const pixel = document.createElement('div');
+        pixel.className = 'pixel';
+        // Random color for each pixel to simulate a simple pixel art
+        pixel.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+        pixelArt.appendChild(pixel);
     }
-    resizeCanvas();
     
-    window.addEventListener('resize', resizeCanvas);
-
-    const snowflakes = [];
-
-    // Snowflake class
-    function Snowflake() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * -canvas.height;
-        this.speed = Math.random() * 1 + 0.5; // Adjusted for slower falling
-        this.radius = Math.random() * 2 + 1;
-        this.opacity = Math.random() * 0.6 + 0.4; // Higher minimum opacity for visibility
-    }
-
-    Snowflake.prototype.update = function() {
-        this.y += this.speed;
-        if (this.y > canvas.height) {
-            this.y = 0 - this.radius;
-            this.x = Math.random() * canvas.width;
-        }
-    };
-
-    Snowflake.prototype.draw = function() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`; // White snowflakes
-        ctx.fill();
-    };
-
-    // Initialize snowflakes
-    for (let i = 0; i < 200; i++) {
-        snowflakes.push(new Snowflake());
-    }
-
-    // Animation loop
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        snowflakes.forEach(snowflake => {
-            snowflake.update();
-            snowflake.draw();
-        });
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-}
-
-// Start the snowfall animation when the page loads
-window.onload = setupSnowfall;
+    // Here you can manipulate the layout or animate pixels if needed
+    pixelArt.style.width = `${pixelCount * 10}px`; // 10px per pixel
+    pixelArt.style.height = `${pixelCount * 10}px`; 
+    pixelArt.style.margin = '0 auto 20px auto';
+});
 </script>
+
 </body>
 </html>
