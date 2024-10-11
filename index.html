@@ -7,10 +7,10 @@
   body {
     margin: 0;
     overflow: hidden;
-    background-color: #000; /* Dark background for better visibility of snow */
+    background-color: #000; /* Black background */
   }
   canvas {
-    display: block; /* removes scrollbars */
+    display: block; /* Remove scrollbars */
   }
 </style>
 </head>
@@ -21,7 +21,7 @@ function setupSnowfall() {
     const canvas = document.getElementById('snowfallCanvas');
     const ctx = canvas.getContext('2d');
     
-    // Resize canvas to fit the window size
+    // Set canvas to window size
     function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -35,4 +35,47 @@ function setupSnowfall() {
     // Snowflake class
     function Snowflake() {
         this.x = Math.random() * canvas.width;
-        this.y = Math.random()​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+        this.y = Math.random() * -canvas.height;
+        this.speed = Math.random() * 1 + 0.5; // Adjusted for slower falling
+        this.radius = Math.random() * 2 + 1;
+        this.opacity = Math.random() * 0.6 + 0.4; // Higher minimum opacity for visibility
+    }
+
+    Snowflake.prototype.update = function() {
+        this.y += this.speed;
+        if (this.y > canvas.height) {
+            this.y = 0 - this.radius;
+            this.x = Math.random() * canvas.width;
+        }
+    };
+
+    Snowflake.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`; // White snowflakes
+        ctx.fill();
+    };
+
+    // Initialize snowflakes
+    for (let i = 0; i < 200; i++) {
+        snowflakes.push(new Snowflake());
+    }
+
+    // Animation loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        snowflakes.forEach(snowflake => {
+            snowflake.update();
+            snowflake.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
+// Start the snowfall animation when the page loads
+window.onload = setupSnowfall;
+</script>
+</body>
+</html>
