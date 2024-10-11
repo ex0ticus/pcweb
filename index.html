@@ -3,18 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixelated Webpage</title>
+<title>Pixelated Webpage with Snow</title>
 <style>
     body {
-        background-color: #000;
-        color: #fff;
-        font-family: 'Courier New', monospace;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
         margin: 0;
         overflow: hidden;
+        background-color: #000; /* Keeping the black background for the snow effect */
+        font-family: 'Courier New', monospace;
+        position: relative; /* Needed for absolute positioning of snowflakes */
+        color: #fff;
+    }
+    .snowflake {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1; /* Ensure snowflakes are below the content */
+    }
+    .container {
+        text-align: center;
+        position: relative; /* So z-index applies */
+        z-index: 2; /* Content above snow */
+        background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
+        padding: 20px;
+        margin: 50px;
+        border-radius: 10px;
     }
     .pixel {
         width: 10px;
@@ -22,9 +37,6 @@
         display: inline-block;
         margin: 0;
         padding: 0;
-    }
-    .container {
-        text-align: center;
     }
     .link {
         color: #1DA1F2;
@@ -50,20 +62,36 @@
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     const pixelArt = document.getElementById('pixelArt');
-    const pixelCount = 20; // Number of pixels in width and height for the logo
+    const pixelCount = 20;
     
+    // Create pixel art
     for(let i = 0; i < pixelCount * pixelCount; i++) {
         const pixel = document.createElement('div');
         pixel.className = 'pixel';
-        // Random color for each pixel to simulate a simple pixel art
         pixel.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
         pixelArt.appendChild(pixel);
     }
     
-    // Here you can manipulate the layout or animate pixels if needed
-    pixelArt.style.width = `${pixelCount * 10}px`; // 10px per pixel
+    pixelArt.style.width = `${pixelCount * 10}px`;
     pixelArt.style.height = `${pixelCount * 10}px`; 
     pixelArt.style.margin = '0 auto 20px auto';
+
+    // Snowfall animation
+    function createSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.style.left = Math.random() * window.innerWidth + 'px';
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+        snowflake.style.opacity = Math.random();
+        snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+        document.body.appendChild(snowflake);
+
+        setTimeout(() => {
+            snowflake.remove();
+        }, 5000);
+    }
+
+    setInterval(createSnowflake, 100);
 });
 </script>
 
