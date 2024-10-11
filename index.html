@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Selectors</title>
-    <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<title>Snowfall Background</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000; /* Dark background for better visibility of snow */
+  }
+  canvas {
+    display: block; /* removes scrollbars */
+  }
+</style>
 </head>
-
 <body>
-<header>
-    <h1>Welcome to My HTML & CSS Mini Projects Gallery!</h1>
-</header>
-Dive into the digital canvas where creativity meets code. This website is your gateway to exploring the foundational elements of web design through HTML and CSS. Here, you'll not only see what's possible with these core technologies but also how they bring web pages to life with style and structure.
-<p><b>What Awaits You:</b></p>
-<ul>
-    <li>Interactive Demonstrations: Each project serves as an interactive showcase, illustrating how HTML constructs the content and how CSS breathes life into it with colors, layouts, and animations.
-    <li>Learning by Doing: This isn't just a gallery; it's a learning hub. Every project comes with accessible source code for you to dissect, experiment with, and expand upon.
-    <li>Project Spotlights:
-        <ul>
-            <li>Dynamic Portfolio Page: Experience how CSS transforms a basic HTML structure into a visually appealing portfolio with responsive design elements.
-            <li>CSS Art: See how CSS can be used not just for layout but for creating art, using nothing but boxes, shadows, and gradients.
-            <li>Themed Landing Pages: Learn how different CSS stylesheets can completely change the mood and user experience of a single HTML document.
-            <li>Animated Menus: Explore the power of CSS transitions and animations to enhance navigation usability.
-        </ul>
-    <li>Why HTML & CSS? These are the cornerstones of web development. HTML provides the skeleton, while CSS dresses it up. Together, they're the perfect starting point for anyone looking to understand or enhance their web design skills.
-    <li>Community Engagement: This space thrives on interaction. You're encouraged to tweak projects, share your creations, or request tutorials on specific techniques or effects.
-</ul>
-<b>Your Web Design Odyssey Begins Here:</b>
-<p>Whether you're taking your first steps in web development or you're here to polish your skills, this site is crafted to inspire and educate. Venture through each project, play with the code, and see how your ideas can shape the web.
-<p><b>Let's Style the Web, Together!</b></p>
-</body>
+<canvas id="snowfallCanvas"></canvas>
+<script>
+function setupSnowfall() {
+    const canvas = document.getElementById('snowfallCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Resize canvas to fit the window size
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    
+    window.addEventListener('resize', resizeCanvas);
 
-</html>
+    const snowflakes = [];
+
+    // Snowflake class
+    function Snowflake() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random()​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
