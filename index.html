@@ -1,99 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixelated Webpage with Snow</title>
-<style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        background-color: #000; /* Keeping the black background for the snow effect */
-        font-family: 'Courier New', monospace;
-        position: relative; /* Needed for absolute positioning of snowflakes */
-        color: #fff;
-    }
-    .snowflake {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        background-color: white;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 1; /* Ensure snowflakes are below the content */
-    }
-    .container {
-        text-align: center;
-        position: relative; /* So z-index applies */
-        z-index: 2; /* Content above snow */
-        background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
-        padding: 20px;
-        margin: 50px;
-        border-radius: 10px;
-    }
-    .pixel {
-        width: 10px;
-        height: 10px;
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-    }
-    .link {
-        color: #1DA1F2;
-        text-decoration: none;
-        border-bottom: 2px dotted #1DA1F2;
-        font-size: 1.2em;
-    }
-    .link:hover {
-        background-color: #1DA1F2;
-        color: #000;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Mouse Trails</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="container">
-    <div id="pixelArt"></div>
-    <h1>Welcome to My Pixel World</h1>
-    <p>Check out my updates on X:</p>
-    <a href="https://x.com/parconstantinou" target="_blank" class="link">@parconstantinou</a>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    const pixelArt = document.getElementById('pixelArt');
-    const pixelCount = 20;
-    
-    // Create pixel art
-    for(let i = 0; i < pixelCount * pixelCount; i++) {
-        const pixel = document.createElement('div');
-        pixel.className = 'pixel';
-        pixel.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
-        pixelArt.appendChild(pixel);
-    }
-    
-    pixelArt.style.width = `${pixelCount * 10}px`;
-    pixelArt.style.height = `${pixelCount * 10}px`; 
-    pixelArt.style.margin = '0 auto 20px auto';
-
-    // Snowfall animation
-    function createSnowflake() {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        snowflake.style.left = Math.random() * window.innerWidth + 'px';
-        snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-        snowflake.style.opacity = Math.random();
-        snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-        document.body.appendChild(snowflake);
-
-        setTimeout(() => {
-            snowflake.remove();
-        }, 5000);
-    }
-
-    setInterval(createSnowflake, 100);
-});
-</script>
-
+<script src="app.ts" type="module"></script>
 </body>
 </html>
