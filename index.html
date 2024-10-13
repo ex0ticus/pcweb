@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rainbow Mouse Trails</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Rainbow Trail</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    .trail {
+      position: absolute;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
-<script src="app.ts" type="module"></script>
+  <script src="index.js"></script>
 </body>
 </html>
